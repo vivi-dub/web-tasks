@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Веб-сайт: Фотогалерея, Регистрация на сайт, Тест, Регистрация на конференцию</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="pages/gallery.html">Фотогалерея</a></li>
+                <li><a href="pages/register.html">Регистрация</a></li>
+                <li><a href="pages/messages.html">Сообщения</a></li>
+                <li><a href="pages/test.html">Тест</a></li>
+                <li><a href="pages/conference.html">Конференция</a></li>
+                <li><a href="pages/conference-participants.html">Участники</a></li>
+                <li id="auth-status">
+                    <span id="user-name"></span>
+                    <button id="logout-btn" style="display:none;">Выйти</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section class="welcome-section">
+            <h1>Добро пожаловать на сайт!</h1>
+            <h2>Итоговое задание по Веб-технологии</h2>
+            <p>Выполнила студентка ПРОГ-С-23</p>
+            <p>Сулейманова Рената</p>
+            <p>Этот сайт демонстрирует различные возможности веб-технологии:</p>
+            <ul>
+                <li><strong>Фотогалерея</strong></li>
+                <li><strong>Система регистрации и авторизации</strong></li>
+                <li><strong>Защищенная страница сообщений</strong></li>
+                <li><strong>Тест</strong></li>
+                <li><strong>Регистрация на конференцию</strong></li>
+                <li><strong>Список участников конференции</strong></li>
+            </ul>
+            <p>Выберите раздел в меню навигации для начала работы.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Веб-технология. Итоговое задание.</p>
+    </footer>
+
+    <script src="scripts/common.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const userName = localStorage.getItem('userName');
+            const userSpan = document.getElementById('user-name');
+            const logoutBtn = document.getElementById('logout-btn');
+            
+            if (userName) {
+                userSpan.textContent = `Привет, ${userName}`;
+                logoutBtn.style.display = 'inline-block';
+            }
+            
+           
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('userName');
+                localStorage.removeItem('userEmail');
+                window.location.reload();
+            });
+        });
+    </script>
+</body>
+</html>

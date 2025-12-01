@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фотогалерея</title>
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Главная</a></li>
+                <li><a href="gallery.html">Фотогалерея</a></li>
+                <li><a href="register.html">Регистрация</a></li>
+                <li><a href="messages.html">Сообщения</a></li>
+                <li><a href="test.html">Тест</a></li>
+                <li><a href="conference.html">Конференция</a></li>
+                <li><a href="conference-participants.html">Участники</a></li>
+                <li id="auth-status">
+                    <span id="user-name"></span>
+                    <button id="logout-btn" style="display:none;">Выйти</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="gallery-container">
+            <h1 class="gallery-title">Фотогалерея</h1>
+            
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </div>
+    </main>
+
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="modalCaption"></div>
+        <button class="modal-nav prev">❮</button>
+        <button class="modal-nav next">❯</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Веб-технология. Итоговое задание.</p>
+    </footer>
+
+    <script src="../scripts/common.js"></script>
+    <script src="../scripts/gallery.js"></script>
+</body>
+</html>

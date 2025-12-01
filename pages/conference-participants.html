@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Участники конференции</title>
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Главная</a></li>
+                <li><a href="gallery.html">Фотогалерея</a></li>
+                <li><a href="register.html">Регистрация</a></li>
+                <li><a href="messages.html">Сообщения</a></li>
+                <li><a href="test.html">Тест</a></li>
+                <li><a href="conference.html">Конференция</a></li>
+                <li><a href="conference-participants.html">Участники</a></li>
+                <li id="auth-status">
+                    <span id="user-name"></span>
+                    <button id="logout-btn" style="display:none;">Выйти</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="participants-container">
+            <h1 class="participants-title">Зарегистрированные участники</h1>
+            
+            <div class="table-actions">
+                <input type="text" id="searchInput" class="search-box" placeholder="Поиск по ФИО или email...">
+                <a href="conference.html" class="btn">Добавить участника</a>
+            </div>
+            
+            <div id="participantsTable">
+               
+                <div class="loading">Загрузка данных...</div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Веб-технология. Итоговое задание.</p>
+    </footer>
+
+    <script>
+        // Загрузка данных участников
+        async function loadParticipants() {
+            try {
+                const response = await fetch('../php/get_participants.php');
+                const data = await response.json();
+                
+                if (data.success) {
+                    renderParticipantsTable(data.participants);
+                } else {
+                    document.getElementById('participantsTable').innerHTML = 
+                        '<div class="error-message">Ошибка загрузки данных</div>';
+                }
+            } catch (error) {
+                document.getElementById('participantsTable').innerHTML = 
+                    '<div class="error-message">Ошибка соединения с сервером</div>';
+            }
+        }
+        
+        function renderParticipantsTable(participants) {
+            if (participants.length === 0) {
+                document.getElementById('participantsTable').innerHTML = 
+                    '<div class="empty-message">Нет зарегистрированных участников</div>';
+                return;
+            }
+            
+            let html = `
+                <table class="participants-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>ФИО</th>
+                            <th>Телефон</th>
+                            <th>Email</th>
+                            <th>Секция</th>
+                            <th>Дата рождения</th>
+                            <th>Доклад</th>
+                            <th>Тема доклада</th>
+                            <th>Дата регистрации</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+            
+            participants.forEach(participant => {
+                html += `
+                    <tr>
+                        <td data-label="ID">${participant.id}</td>
+                        <td data-label="ФИО">${escapeHtml(participant.full_name)}</td>
+                        <td data-label="Телефон">${escapeHtml(participant.phone)}</td>
+                        <td data-label="Email">${escapeHtml(participant.email)}</td>
+                        <td data-label="Секция">${escapeHtml(participant.section)}</td>
+                        <td data-label="Дата рождения">${participant.birth_date || '—'}</td>
+                        <td data-label="Доклад">${participant.has_report ? 'Да' : 'Нет'}</td>
+                        <td data-label="Тема доклада">${participant.report_topic ? escapeHtml(participant.report_topic) : '—'}</td>
+                        <td data-label="Дата регистрации">${formatDate(participant.created_at)}</td>
+                    </tr>`;
+            });
+            
+            html += `</tbody>
+                </table>
+                <div class="total-count">
+                    Всего участников: <strong>${participants.length}</strong>
+                </div>`;
+            
+            document.getElementById('participantsTable').innerHTML = html;
+        }
+        
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ru-RU', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+        
+        // Поиск
+        document.getElementById('searchInput')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('.participants-table tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+        
+        // Загружаем данные при загрузке страницы
+        document.addEventListener('DOMContentLoaded', loadParticipants);
+    </script>
+    
+    <script src="../scripts/auth.js"></script>
+    <script src="../scripts/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Главная</a></li> 
+                <li><a href="gallery.html">Фотогалерея</a></li>
+                <li><a href="register.html">Регистрация</a></li>
+                <li><a href="messages.html">Сообщения</a></li>
+                <li><a href="test.html">Тест</a></li>
+                <li><a href="conference.html">Конференция</a></li>
+                <li><a href="conference-participants.html">Участники</a></li>
+                <li id="auth-status">
+                    <span id="user-name"></span>
+                    <button id="logout-btn" style="display:none;">Выйти</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="form-container">
+            <h2 id="form-title">Регистрация</h2>
+            
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="reg-login">Логин:</label>
+                    <input type="text" 
+                           id="reg-login" 
+                           class="form-control" 
+                           placeholder="Введите логин"
+                           pattern="[a-zA-Z0-9_-]+"
+                           title="Только латинские буквы, цифры, подчеркивание и тире"
+                           required>
+                    <div class="error-message" id="login-error">Логин должен содержать только латинские буквы, цифры, подчеркивание и тире</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg-password">Пароль:</label>
+                    <input type="password" 
+                           id="reg-password" 
+                           class="form-control" 
+                           placeholder="Введите пароль (минимум 6 символов)"
+                           minlength="6"
+                           required>
+                    <div class="error-message" id="password-error">Пароль должен содержать минимум 6 символов</div>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="save-data">
+                    <label for="save-data">Сохранить данные</label>
+                </div>
+                
+                <button type="submit" class="btn">Зарегистрироваться</button>
+            </form>
+            
+            <form id="login-form" style="display: none;">
+                <div class="form-group">
+                    <label for="login-username">Логин:</label>
+                    <input type="text" 
+                           id="login-username" 
+                           class="form-control" 
+                           placeholder="Введите логин"
+                           required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">Пароль:</label>
+                    <input type="password" 
+                           id="login-password" 
+                           class="form-control" 
+                           placeholder="Введите пароль"
+                           required>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="auto-login">
+                    <label for="auto-login">Автоматически авторизоваться при последующем входе</label>
+                </div>
+                
+                <button type="submit" class="btn">Войти</button>
+            </form>
+            
+            <div class="form-switch">
+                <span id="switch-text">Уже есть аккаунт?</span>
+                <a href="#" id="switch-link">Войти</a>
+            </div>
+            
+            <div id="form-message" style="margin-top: 20px; text-align: center; display: none;"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Веб-технология. Итоговое задание.</p>
+    </footer>
+
+    <script src="../scripts/common.js"></script>
+    <script src="../scripts/auth.js"></script>
+</body>
+</html>

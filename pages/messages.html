@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сообщения</title>
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Главная</a></li>
+                <li><a href="gallery.html">Фотогалерея</a></li>
+                <li><a href="register.html">Регистрация</a></li>
+                <li><a href="messages.html">Сообщения</a></li>
+                <li><a href="test.html">Тест</a></li>
+                <li><a href="conference.html">Конференция</a></li>
+                <li><a href="conference-participants.html">Участники</a></li>
+                <li id="auth-status">
+                    <span id="user-name"></span>
+                    <button id="logout-btn" style="display:none;">Выйти</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div id="auth-check" style="display: none;">
+            <div class="protected-message">
+                <h2>Доступ запрещен</h2>
+                <p>Эта страница доступна только для авторизованных пользователей.</p>
+                <p>Пожалуйста, <a href="register.html">войдите</a> или <a href="register.html">зарегистрируйтесь</a>.</p>
+            </div>
+        </div>
+        
+        <div id="messages-content" style="display: none;">
+            <div class="messages-container">
+                <h1 class="messages-title">Сообщения</h1>
+                <div class="auth-info" style="margin-bottom: 20px; padding: 10px; background: #f0f8ff; border-radius: 5px;">
+                    <p><strong>Информация об авторизации:</strong></p>
+                    <p id="auth-type-info"></p>
+                </div>
+                
+                <ul class="message-list" id="message-list">
+                    
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Веб-технология. Итоговое задание.</p>
+    </footer>
+
+    <script src="../scripts/common.js"></script>
+    <script src="../scripts/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const authCheck = document.getElementById('auth-check');
+            const messagesContent = document.getElementById('messages-content');
+            const authTypeInfo = document.getElementById('auth-type-info');
+            
+            // Проверка авторизации
+            const currentUser = localStorage.getItem('currentUser');
+            const rememberUser = localStorage.getItem('rememberUser');
+            const sessionToken = sessionStorage.getItem('sessionToken');
+            
+            if (!currentUser || (!sessionToken && rememberUser !== 'true')) {
+                // Пользователь не авторизован
+                authCheck.style.display = 'block';
+                messagesContent.style.display = 'none';
+            } else {
+                // Пользователь авторизован
+                authCheck.style.display = 'none';
+                messagesContent.style.display = 'block';
+                
+                // Показываем тип авторизации
+                if (rememberUser === 'true') {
+                    authTypeInfo.innerHTML = `
+                        ✅ Вы авторизованы автоматически (через "Запомнить меня")<br>
+                        🔄 При следующем посещении сайта вы останетесь авторизованным<br>
+                        👤 Пользователь: <strong>${currentUser}</strong>
+                    `;
+                } else {
+                    authTypeInfo.innerHTML = `
+                        🔓 Вы авторизованы только для текущей сессии<br>
+                        ⚠️ При закрытии браузера потребуется снова войти<br>
+                        👤 Пользователь: <strong>${currentUser}</strong>
+                    `;
+                }
+                
+                // Загружаем сообщения
+                loadMessages(currentUser);
+            }
+            
+            function loadMessages(currentUser) {
+                const messages = [
+                    {
+                        id: 1,
+                        author: 'Администратор',
+                        date: new Date().toLocaleDateString('ru-RU'),
+                        content: 'Добро пожаловать на наш сайт! Мы рады видеть вас здесь.'
+                    },
+                    {
+                        id: 2,
+                        author: 'Модератор',
+                        date: new Date(Date.now() - 86400000).toLocaleDateString('ru-RU'),
+                        content: 'Напоминаем, что фотогалерея обновляется каждую неделю.'
+                    },
+                    {
+                        id: 3,
+                        author: 'Разработчик',
+                        date: new Date(Date.now() - 172800000).toLocaleDateString('ru-RU'),
+                        content: 'Если вы нашли ошибки на сайте, пожалуйста, сообщите нам.'
+                    },
+                    {
+                        id: 4,
+                        author: currentUser,
+                        date: new Date().toLocaleDateString('ru-RU'),
+                        content: 'Привет! Это ваше первое сообщение. Здесь будут отображаться важные уведомления.'
+                    },
+                    {
+                        id: 5,
+                        author: 'Система',
+                        date: new Date().toLocaleDateString('ru-RU'),
+                        content: `Ваш аккаунт зарегистрирован: ${new Date().toLocaleDateString('ru-RU')}.`
+                    }
+                ];
+                
+                const messageList = document.getElementById('message-list');
+                messageList.innerHTML = '';
+                
+                messages.forEach(message => {
+                    const messageItem = document.createElement('li');
+                    messageItem.className = 'message-item';
+                    
+                    messageItem.innerHTML = `
+                        <div class="message-header">
+                            <span class="message-author">${message.author}</span>
+                            <span class="message-date">${message.date}</span>
+                        </div>
+                        <div class="message-content">${message.content}</div>
+                    `;
+                    
+                    messageList.appendChild(messageItem);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

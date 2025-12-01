@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест по основам веб-программирования</title>
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Главная</a></li>
+                <li><a href="gallery.html">Фотогалерея</a></li>
+                <li><a href="register.html">Регистрация</a></li>
+                <li><a href="messages.html">Сообщения</a></li>
+                <li><a href="test.html">Тест</a></li>
+                <li><a href="conference.html">Конференция</a></li>
+                <li><a href="conference-participants.html">Участники</a></li>
+                <li id="auth-status">
+                    <span id="user-name"></span>
+                    <button id="logout-btn" style="display:none;">Выйти</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="test-container">
+            <h1 class="test-title">Тест по основам веб-программирования</h1>
+            
+            <form id="web-test-form">
+                <div class="questions-grid">
+                    <!-- Вопрос 1 -->
+                    <div class="question-card">
+                        <div class="question-number">Вопрос 1</div>
+                        <div class="question-text">Что означает аббревиатура HTML?</div>
+                        <div class="options-group">
+                            <label class="option-label">
+                                <input type="radio" name="q1" value="a">
+                                <span class="option-text">Hyper Text Markup Language</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="q1" value="b">
+                                <span class="option-text">High Tech Modern Language</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="q1" value="c">
+                                <span class="option-text">Hyper Transfer Markup Language</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="q1" value="d">
+                                <span class="option-text">Home Tool Markup Language</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Вопрос 2 -->
+                    <div class="question-card">
+                        <div class="question-number">Вопрос 2</div>
+                        <div class="question-text">Какие из перечисленных тегов являются блочными элементами в HTML?</div>
+                        <div class="options-group">
+                            <label class="option-label">
+                                <input type="checkbox" name="q2" value="a">
+                                <span class="option-text">&lt;div&gt;</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="q2" value="b">
+                                <span class="option-text">&lt;span&gt;</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="q2" value="c">
+                                <span class="option-text">&lt;p&gt;</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="q2" value="d">
+                                <span class="option-text">&lt;section&gt;</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Вопрос 3 -->
+                    <div class="question-card">
+                        <div class="question-number">Вопрос 3</div>
+                        <div class="question-text">Какой CSS-селектор имеет наибольшую специфичность?</div>
+                        <div class="options-group">
+                            <label class="option-label">
+                                <input type="radio" name="q3" value="a">
+                                <span class="option-text">#id</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="q3" value="b">
+                                <span class="option-text">.class</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="q3" value="c">
+                                <span class="option-text">tag</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="q3" value="d">
+                                <span class="option-text">inline style</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Вопрос 4 -->
+                    <div class="question-card">
+                        <div class="question-number">Вопрос 4</div>
+                        <div class="question-text">Что делает свойство "display: flex" в CSS?</div>
+                        <div class="options-group">
+                            <label class="option-label">
+                                <input type="radio" name="q4" value="a">
+                                <span class="option-text">Создает flex-контейнер</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="q4" value="b">
+                                <span class="option-text">Скрывает элемент</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="q4" value="c">
+                                <span class="option-text">Делает элемент блочным</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="q4" value="d">
+                                <span class="option-text">Добавляет анимацию</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Вопрос 5 -->
+                    <div class="question-card">
+                        <div class="question-number">Вопрос 5</div>
+                        <div class="question-text">Какие из перечисленных методов HTTP используются для получения данных с сервера?</div>
+                        <div class="options-group">
+                            <label class="option-label">
+                                <input type="checkbox" name="q5" value="a">
+                                <span class="option-text">GET</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="q5" value="b">
+                                <span class="option-text">POST</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="q5" value="c">
+                                <span class="option-text">PUT</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="q5" value="d">
+                                <span class="option-text">DELETE</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Вопрос 6 -->
+                    <div class="question-card">
+                        <div class="question-number">Вопрос 6</div>
+                        <div class="question-text">Введите название языка программирования, который выполняется в браузере и используется для создания интерактивных веб-страниц:</div>
+                        <div class="options-group">
+                            <input type="text" 
+                                   name="q6" 
+                                   class="text-input" 
+                                   placeholder="Введите ответ">
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn" style="max-width: 300px; margin: 40px auto;">Проверить тест</button>
+            </form>
+            
+            <div class="test-result" id="test-result">
+                <h2 class="result-title">Результаты теста</h2>
+                <div class="result-score" id="score"></div>
+                <div class="incorrect-answers" id="incorrect-answers" style="display: none;">
+                    <h3 class="incorrect-title">Неправильные ответы:</h3>
+                    <ul class="incorrect-list" id="incorrect-list"></ul>
+                </div>
+                <button class="btn" id="retry-btn" style="max-width: 200px; margin: 20px auto 0;">Пройти снова</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Веб-технология. Итоговое задание.</p>
+    </footer>
+
+    <script src="../scripts/common.js"></script>
+    <script src="../scripts/test.js"></script>
+</body>
+</html>
